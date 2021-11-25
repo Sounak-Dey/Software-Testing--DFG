@@ -504,14 +504,17 @@ public class Main {
     {
         // Initialize starting indexes for ar1[], ar2[] and ar3[]
         int i = 0, j = 0, k = 0;
-
+        Arrays.sort(ar1);
+        Arrays.sort(ar2);
+        Arrays.sort(ar3);
+        int f=0;
         // Iterate through three arrays while all arrays have elements
         while (i < ar1.length && j < ar2.length && k < ar3.length)
         {
             // If x = y and y = z, print any of them and move ahead
             // in all arrays
             if (ar1[i] == ar2[j] && ar2[j] == ar3[k])
-            {   System.out.print(ar1[i]+" ");   i++; j++; k++; }
+            {  f=1; System.out.print("Common elements are"+ar1[i]+" ");   i++; j++; k++; }
 
             // x < y
             else if (ar1[i] < ar2[j])
@@ -524,6 +527,9 @@ public class Main {
                 // We reach here when x > y and z < y, i.e., z is smallest
             else
                 k++;
+        }
+        if(f==0) {
+            System.out.println("No common elements found\n");
         }
     }
 
