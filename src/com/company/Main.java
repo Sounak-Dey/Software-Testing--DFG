@@ -334,9 +334,9 @@ public class Main {
             arr.set(i,temp);
         }
 
-        // for (int i=0; i<n; ++i)
-        //     System.out.print(arr[i]+" ");
-        // System.out.println();
+         for (int i=0; i<n; ++i)
+             System.out.print(arr.get(i)+" ");
+         System.out.println();
 
     }
 
@@ -356,9 +356,9 @@ public class Main {
                 }
 
 
-        // for (int i=0; i<n; ++i)
-        //     System.out.print(arr[i]+" ");
-        // System.out.println();
+         for (int i=0; i<n; ++i)
+             System.out.print(arr.get(i)+" ");
+         System.out.println();
     }
 
 
@@ -382,9 +382,9 @@ public class Main {
         }
 
 
-        // for (int i=0; i<n; ++i)
-        //     System.out.print(arr[i]+" ");
-        // System.out.println();
+         for (int i=0; i<n; ++i)
+             System.out.print(arr.get(i)+" ");
+         System.out.println();
     }
 
 
@@ -499,226 +499,544 @@ public class Main {
 
             return low;
         }
+
+    public void findCommon(int ar1[], int ar2[], int ar3[])
+    {
+        // Initialize starting indexes for ar1[], ar2[] and ar3[]
+        int i = 0, j = 0, k = 0;
+
+        // Iterate through three arrays while all arrays have elements
+        while (i < ar1.length && j < ar2.length && k < ar3.length)
+        {
+            // If x = y and y = z, print any of them and move ahead
+            // in all arrays
+            if (ar1[i] == ar2[j] && ar2[j] == ar3[k])
+            {   System.out.print(ar1[i]+" ");   i++; j++; k++; }
+
+            // x < y
+            else if (ar1[i] < ar2[j])
+                i++;
+
+                // y < z
+            else if (ar2[j] < ar3[k])
+                j++;
+
+                // We reach here when x > y and z < y, i.e., z is smallest
+            else
+                k++;
+        }
+    }
+
+    public void search(String pat, String txt)
+    {
+        int M = pat.length();
+        int N = txt.length();
+        int i = 0;
+
+        while (i <= N - M)
+        {
+            int j;
+
+            /* For current index i, check for pattern match */
+            for (j = 0; j < M; j++)
+                if (txt.charAt(i + j) != pat.charAt(j))
+                    break;
+
+            if (j == M) // if pat[0...M-1] = txt[i, i+1, ...i+M-1]
+            {
+                System.out.println("Pattern found at index "+i);
+                i = i + M;
+            }
+            else if (j == 0)
+                i = i + 1;
+            else
+                i = i + j; // slide the pattern by j
+        }
+    }
+
+    public int power(int x, int y)
+    {
+        int result = 1;
+
+        while (y > 0)
+        {
+
+            // y is even
+            if (y % 2 == 0)
+            {
+                x = x * x;
+                y = y / 2;
+            }
+
+            // y isn't even
+            else
+            {
+                result = result * x;
+                y = y - 1;
+            }
+        }
+        return result;
+    }
+
+    public int getMedian(int ar1[], int ar2[],
+                         int n, int m)
+    {
+
+        // Current index of input array ar1[]
+        int i = 0;
+
+        // Current index of input array ar2[]
+        int j = 0;
+        int count;
+        int m1 = -1, m2 = -1;
+
+        // Since there are (n+m) elements,
+        // There are following two cases
+        // if n+m is odd then the middle
+        //index is median i.e. (m+n)/2
+        if ((m + n) % 2 == 1)
+        {
+            for(count = 0;
+                count <= (n + m) / 2;
+                count++)
+            {
+                if (i != n && j != m)
+                {
+                    m1 = (ar1[i] > ar2[j]) ?
+                            ar2[j++] : ar1[i++];
+                }
+                else if (i < n)
+                {
+                    m1 = ar1[i++];
+                }
+
+                // for case when j<m,
+                else
+                {
+                    m1 = ar2[j++];
+                }
+            }
+            return m1;
+        }
+
+        // median will be average of elements
+        // at index ((m+n)/2 - 1) and (m+n)/2
+        // in the array obtained after merging
+        // ar1 and ar2
+        else
+        {
+            for(count = 0;
+                count <= (n + m) / 2;
+                count++)
+            {
+                m2 = m1;
+                if (i != n && j != m)
+                {
+                    m1 = (ar1[i] > ar2[j]) ?
+                            ar2[j++] : ar1[i++];
+                }
+                else if (i < n)
+                {
+                    m1 = ar1[i++];
+                }
+
+                // for case when j<m,
+                else
+                {
+                    m1 = ar2[j++];
+                }
+            }
+            return (m1 + m2) / 2;
+        }
+    }
+
+    public int getInvCount(ArrayList<Integer> arr, int n)
+    {
+        int inv_count = 0;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = i + 1; j < n; j++)
+                if (arr.get(i) > arr.get(i))
+                    inv_count++;
+
+        return inv_count;
+    }
+
+    static int fib(int n)
+    {
+        int F[][] = new int[][]{{1,1},{1,0}};
+        if (n == 0)
+            return 0;
+        power(F, n-1);
+
+        return F[0][0];
+    }
+
+    static void multiply(int F[][], int M[][])
+    {
+        int x =  F[0][0]*M[0][0] + F[0][1]*M[1][0];
+        int y =  F[0][0]*M[0][1] + F[0][1]*M[1][1];
+        int z =  F[1][0]*M[0][0] + F[1][1]*M[1][0];
+        int w =  F[1][0]*M[0][1] + F[1][1]*M[1][1];
+
+        F[0][0] = x;
+        F[0][1] = y;
+        F[1][0] = z;
+        F[1][1] = w;
+    }
+
+    /* Optimized version of power() in method 4 */
+    static void power(int F[][], int n)
+    {
+        if( n == 0 || n == 1)
+            return;
+        int M[][] = new int[][]{{1,1},{1,0}};
+
+        power(F, n/2);
+        multiply(F, F);
+
+        if (n%2 != 0)
+            multiply(F, M);
+    }
+
+    static int getMax(int arr[], int n)
+    {
+        int mx = arr[0];
+        for (int i = 1; i < n; i++)
+            if (arr[i] > mx)
+                mx = arr[i];
+        return mx;
+    }
+
+    // A function to do counting sort of arr[] according to
+    // the digit represented by exp.
+    static void countSort(int arr[], int n, int exp)
+    {
+        int output[] = new int[n]; // output array
+        int i;
+        int count[] = new int[10];
+        Arrays.fill(count, 0);
+
+        // Store count of occurrences in count[]
+        for (i = 0; i < n; i++)
+            count[(arr[i] / exp) % 10]++;
+
+        // Change count[i] so that count[i] now contains
+        // actual position of this digit in output[]
+        for (i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+
+        // Build the output array
+        for (i = n - 1; i >= 0; i--) {
+            output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+            count[(arr[i] / exp) % 10]--;
+        }
+
+        // Copy the output array to arr[], so that arr[] now
+        // contains sorted numbers according to current digit
+        for (i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+
+    // The main function to that sorts arr[] of size n using
+    // Radix Sort
+    static void radixsort(ArrayList<Integer> al, int n)
+    {
+        int[] arr = al.stream().mapToInt(Integer::intValue).toArray();
+        // Find the maximum number to know number of digits
+        int m = getMax(arr, n);
+
+        // Do counting sort for every digit. Note that
+        // instead of passing digit number, exp is passed.
+        // exp is 10^i where i is current digit number
+        for (int exp = 1; m / exp > 0; exp *= 10)
+            countSort(arr, n, exp);
+        print(arr,n);
+    }
+
+    // A utility function to print an array
+    static void print(int arr[], int n)
+    {
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+    }
     public static void main(String[] args) {
 	// write your code here
         System.out.println("Welcome to DSA Util CLI");
-        System.out.println("Enter the choice");
-        System.out.println("1 Sorting \n" +
-                "2 Searching\n" +
-                "3 String operations\n" +
-                "4 Array operations\n");
-        Scanner sc=new Scanner(System.in);
-        int ch= sc.nextInt();
-        Main mn=new Main();
-        if(ch==1){
-            System.out.println("This is sorting utility");
-            System.out.println("Enter the array for sorting");
-            System.out.println("Enter the Size of the array");
-            int n=sc.nextInt();
-            ArrayList <Integer> array=new ArrayList<Integer>(n);
-            for(int i=0; i<n; i++)
-            {
-                int ele=sc.nextInt();
-                array.set(i,ele);
-            }
-            System.out.println("1 Selection sort\n" +
-                    "2 Bubble Sort\n" +
-                    "3 Insertion sort\n");
-            int chs= sc.nextInt();
-            if(chs==1){
-                mn.SelectionSort(array);
-            }else if(chs==2){
-                mn.BubbleSort(array);
-            }
-            else if(ch==3){
-                mn.Insertionsort(array);
-            }
-        }
-        else if(ch==2){
-            System.out.println("This is search utility");
-            System.out.println("1 Linear Search\n" +
-                    "2 Binary Search \n" +
-                    "3 Find min element\n" +
-                    "4 Find max element\n" +
-                    "5 Lower bound\n" +
-                    "6 Upper bound\n");
-            int ch2= sc.nextInt();
-            System.out.println("Enter the Size of the array");
-            int n=sc.nextInt();
-            ArrayList <Integer> array=new ArrayList<Integer>(n);
-            for(int i=0; i<n; i++)
-            {
-                int ele=sc.nextInt();
-                array.set(i,ele);
-            }
-            if(ch2==1){
-                System.out.println("Enter the element you want to find");
-                int x=sc.nextInt();
-                int pos=mn.linearSearch(array,x);
-                if(pos!=-1){
-                    System.out.println("Element found at  "+pos);
+        while(true) {
+            System.out.println("Enter the choice");
+            System.out.println("1 Sorting \n" +
+                    "2 Searching\n" +
+                    "3 String operations\n" +
+                    "4 Array operations\n" +
+                    "5 Bit operations\n" +
+                    "6 Other operations\n"+
+                    "7 Exit\n");
+            Scanner sc = new Scanner(System.in);
+            int ch = sc.nextInt();
+            Main mn = new Main();
+            if (ch == 1) {
+                System.out.println("This is sorting utility");
+                System.out.println("Enter the Size of the array");
+                int n = sc.nextInt();
+                ArrayList<Integer> array = new ArrayList<Integer>(n);
+                System.out.println("Enter the array for sorting");
+                for (int i = 0; i < n; i++) {
+                    int ele = sc.nextInt();
+                    array.add(ele);
                 }
-                else{
-                    System.out.println("Element not found");
+                System.out.println("1 Selection sort\n" +
+                        "2 Bubble Sort\n" +
+                        "3 Insertion sort\n" +
+                        "4 Radix sort\n");
+                int chs = sc.nextInt();
+                if (chs == 1) {
+                    mn.SelectionSort(array);
+                } else if (chs == 2) {
+                    mn.BubbleSort(array);
+                } else if (ch == 3) {
+                    mn.Insertionsort(array);
+                } else if (ch == 4) {
+                    radixsort(array, n);
+                }
+            } else if (ch == 2) {
+                System.out.println("This is search utility");
+                System.out.println("1 Linear Search\n" +
+                        "2 Binary Search \n" +
+                        "3 Find min element\n" +
+                        "4 Find max element\n" +
+                        "5 Lower bound\n" +
+                        "6 Upper bound\n");
+                int ch2 = sc.nextInt();
+                System.out.println("Enter the Size of the array");
+                int n = sc.nextInt();
+                ArrayList<Integer> array = new ArrayList<Integer>(n);
+                System.out.println("Enter the array for searching");
+                for (int i = 0; i < n; i++) {
+                    int ele = sc.nextInt();
+                    array.add(ele);
+                }
+                if (ch2 == 1) {
+                    System.out.println("Enter the element you want to find");
+                    int x = sc.nextInt();
+                    int pos = mn.linearSearch(array, x);
+                    if (pos != -1) {
+                        System.out.println("Element found at  " + pos);
+                    } else {
+                        System.out.println("Element not found");
+                    }
+                }
+                if (ch2 == 2) {
+                    System.out.println("Enter the element you want to find");
+                    int x = sc.nextInt();
+                    int pos = mn.binarySearch(array, x);
+                    if (pos != -1) {
+                        System.out.println("Element found at " + pos);
+                    } else {
+                        System.out.println("Element not found");
+                    }
+                }
+                if (ch2 == 3) {
+                    int min = mn.min(array);
+                    System.out.println("MIN element in array is " + min);
+                }
+                if (ch2 == 4) {
+                    int max = mn.max(array);
+
+                    System.out.println("MAX element in array is " + max);
+                }
+                if (ch2 == 5) {
+                    System.out.println("Enter the element you want to find Lower bound of");
+                    int x = sc.nextInt();
+                    System.out.println("Lower bound of" + x + "is=" + mn.lower_bound(array, x));
+                }
+                if (ch2 == 6) {
+                    System.out.println("Enter the element you want to find upper bound of");
+                    int x = sc.nextInt();
+                    System.out.println("Upper bound of" + x + "is=" + mn.upper_bound(array, x));
+                }
+
+            } else if (ch == 3) {
+                System.out.println("This is string utility");
+                //            Sysx`tem.out.println("Enter the string you want to perform operations on");
+                //            String s=sc.nextLine();
+                System.out.println("1 Count Vowels and consonants\n" +
+                        "2 Check anagram\n" +
+                        "3 Count punctuations\n" +
+                        "4 Get max occuring Character\n" +
+                        "5 Get frequency of all characters\n+" +
+                        "6 check a string is palindrome or not" +
+                        "7 Pattern search");
+                int ch3 = sc.nextInt();
+                if (ch3 == 1) {
+                    System.out.println("Enter the string you want to perform operations on");
+                    String s = sc.nextLine();
+
+                    mn.countVowelsConsonants(s);
+                } else if (ch3 == 2) {
+                    System.out.println("Enter the strings");
+                    String s1 = sc.nextLine();
+                    String s2 = sc.nextLine();
+
+                    if (mn.Anagram(s1, s2)) {
+                        System.out.println("Given strings are anagram\n");
+                    } else {
+                        System.out.println("Given strings are not anagram\n");
+                    }
+                } else if (ch3 == 3) {
+                    System.out.println("Enter the string");
+                    String s = sc.nextLine();
+
+                    mn.countPunctuation(s);
+                } else if (ch3 == 4) {
+
+                    System.out.println("Enter the string you want to perform operations on");
+                    String s = sc.nextLine();
+
+                    System.out.println("Max occuring character is = " + mn.getMaxOccuringChar(s));
+
+                } else if (ch3 == 5) {
+                    System.out.println("Enter the string you want to perform operations on");
+                    String s = sc.nextLine();
+                    mn.printCharWithFreq(s);
+                } else if (ch3 == 6) {
+                    System.out.println("Enter the string you want to perform operations on");
+                    String s = sc.nextLine();
+                    boolean isit = mn.isPalindrome(s);
+
+                    if (isit) {
+                        System.out.println("string " + s + " " + "is a palindrome");
+                    } else {
+                        System.out.println("string " + s + " " + "is not a palindrome");
+                    }
+                } else if (ch3 == 7) {
+                    System.out.println("Enter the strings");
+                    System.out.println("pattern =");
+                    String s1 = sc.nextLine();
+                    System.out.println("Text= ");
+                    String s2 = sc.nextLine();
+                    mn.search(s1, s2);
+                }
+
+            } else if (ch == 4) {
+                System.out.println("This is array operations utility");
+                System.out.println("1 print all odd numbers in array\n" +
+                        "2 Print all even numbers \n" +
+                        "3 sum of array \n" +
+                        "4 Find mean \n" +
+                        "5 Find median\n" +
+                        "6 Find median of two sorted arrays\n" +
+                        "7 Find inversion count\n" +
+                        "8 Find common in three arrays\n");
+                int ch4 = sc.nextInt();
+                System.out.println("Enter the Size of the array");
+                int n = sc.nextInt();
+                ArrayList<Integer> array = new ArrayList<Integer>(n);
+                System.out.println("Enter the array \n");
+                for (int i = 0; i < n; i++) {
+                    int ele = sc.nextInt();
+                    array.add(ele);
+                }
+                if (ch4 == 1) {
+                    mn.printOdd(array);
+                } else if (ch4 == 2) {
+                    mn.printEven(array);
+                } else if (ch4 == 3) {
+                    System.out.println("Sum of given array =" + mn.sumArray(array));
+                } else if (ch4 == 4) {
+                    System.out.println("Mean of given array =" + mn.findMean(array));
+                } else if (ch4 == 5) {
+                    System.out.println("Median of given array =" + mn.findMedian(array));
+                } else if (ch4 == 6) {
+                    System.out.println("Enter the Size of second array\n");
+                    int m = sc.nextInt();
+                    ArrayList<Integer> array2 = new ArrayList<Integer>(m);
+                    System.out.println("Enter the array \n");
+                    for (int i = 0; i < m; i++) {
+                        int ele = sc.nextInt();
+                        array2.add(ele);
+                    }
+                    int[] arr1 = array.stream().mapToInt(Integer::intValue).toArray();
+                    int[] arr2 = array2.stream().mapToInt(Integer::intValue).toArray();
+                    System.out.println("Median of the given arrays= " + mn.getMedian(arr1, arr2, n, m));
+
+                } else if (ch4 == 7) {
+                    System.out.println("Inversion count of given array is= " + mn.getInvCount(array, n));
+                } else if (ch4 == 8) {
+                    System.out.println("Enter the Size of second array");
+                    int n2 = sc.nextInt();
+                    ArrayList<Integer> array2 = new ArrayList<Integer>(n2);
+                    System.out.println("Enter the array \n");
+                    for (int i = 0; i < n2; i++) {
+                        int ele = sc.nextInt();
+                        array2.add(ele);
+                    }
+                    System.out.println("Enter the Size of third array");
+                    int n3 = sc.nextInt();
+                    ArrayList<Integer> array3 = new ArrayList<Integer>(n3);
+                    System.out.println("Enter the array \n");
+                    for (int i = 0; i < n3; i++) {
+                        int ele = sc.nextInt();
+                        array3.add(ele);
+                    }
+                    int[] arr1 = array.stream().mapToInt(Integer::intValue).toArray();
+                    int[] arr2 = array2.stream().mapToInt(Integer::intValue).toArray();
+                    int[] arr3 = array3.stream().mapToInt(Integer::intValue).toArray();
+                    mn.findCommon(arr1, arr2, arr3);
+                }
+            } else if (ch == 5) {
+                System.out.println("This bit manipulation menu");
+                System.out.println("1 Next power of 2\n" +
+                        "2 Left rotate\n" +
+                        "3 Right rotate\n" +
+                        "4 Count set bits\n" +
+                        "5 Check if it is power of 4\n");
+                int ch5 = sc.nextInt();
+                System.out.println("Enter the number");
+                int n = sc.nextInt();
+
+                if (ch5 == 1) {
+                    System.out.println("Next power of n is" + nextPowerOf2(n));
+                } else if (ch5 == 2) {
+                    System.out.println("by how much bits you want to rotate n");
+                    int x = sc.nextInt();
+                    System.out.println("Left rotate n by x" + leftRotate(n, x));
+                } else if (ch5 == 3) {
+                    System.out.println("by how much bits you want to rotate n");
+                    int x = sc.nextInt();
+                    System.out.println("Right rotate n by x" + rightRotate(n, x));
+                } else if (ch5 == 4) {
+                    System.out.println("Set bits in n " + countSetBits(n));
+                } else if (ch5 == 5) {
+                    int ret = isPowerOfFour(n);
+                    if (ret == 1) {
+                        System.out.println("N is power of four");
+                    } else {
+                        System.out.println("N is not a power of four");
+                    }
+                }
+            } else if (ch == 6) {
+                System.out.println("Other operations Menu\n");
+                System.out.println("1: Fibonacci of number\n" +
+                        "2: Power function(x raised to the power y)");
+                int ch6 = sc.nextInt();
+                if (ch6 == 1) {
+                    System.out.println("Enter the number\n");
+                    int n = sc.nextInt();
+                    System.out.println("Fibonacci of number " + n + "is= " + fib(n));
+                }
+                if (ch6 == 2) {
+                    System.out.println("Enter the number x\n");
+                    int x = sc.nextInt();
+                    System.out.println("raised to the power y\n");
+                    int y = sc.nextInt();
+                    System.out.println("Power(" + x + "," + y + ")" + "= " + mn.power(x, y));
                 }
             }
-            if(ch2==2){
-                System.out.println("Enter the element you want to find");
-                int x=sc.nextInt();
-                int pos=mn.binarySearch(array,x);
-                if(pos!=-1){
-                    System.out.println("Element found at "+pos);
-                }
-                else{
-                    System.out.println("Element not found");
-                }
-            }
-            if(ch2==3){
-                int min=mn.min(array);
-                System.out.println("MIN element in array is "+ min);
-            }
-            if(ch2==4){
-                int max=mn.max(array);
-
-                System.out.println("MAX element in array is "+ max);
-            }
-            if(ch2==5){
-                System.out.println("Enter the element you want to find Lower bound of");
-                int x=sc.nextInt();
-                mn.lower_bound(array,x);
-            }
-            if(ch2==6){
-                System.out.println("Enter the element you want to find upper bound of");
-                int x=sc.nextInt();
-                mn.upper_bound(array,x);
-            }
-
-        }
-        else if(ch==3){
-            System.out.println("This is string utility");
-//            Sysx`tem.out.println("Enter the string you want to perform operations on");
-//            String s=sc.nextLine();
-            System.out.println("1 Count Vowels and consonants\n" +
-                    "2 Check anagram\n" +
-                    "3 Count punctuations\n" +
-                    "4 Get max occuring Character\n" +
-                    "5 Get frequency of all characters\n+" +
-                    "6 check a string is palindrome or not");
-            int ch3= sc.nextInt();
-            if (ch3==1){
-                System.out.println("Enter the string you want to perform operations on");
-                String s=sc.nextLine();
-
-                mn.countVowelsConsonants(s);
-            }
-            else if(ch3==2){
-                System.out.println("Enter the strings");
-                String s1=sc.nextLine();
-                String s2=sc.nextLine();
-
-                mn.Anagram(s1,s2);
-            }
-            else if(ch3==3){
-                System.out.println("Enter the string");
-                String s=sc.nextLine();
-
-                mn.countPunctuation(s);
-            }
-            else if(ch3==4){
-
-                System.out.println("Enter the string you want to perform operations on");
-                String s=sc.nextLine();
-
-                mn.getMaxOccuringChar(s);
-
-            }
-            else if(ch3==5){
-                System.out.println("Enter the string you want to perform operations on");
-                String s=sc.nextLine();
-                mn.printCharWithFreq(s);
-            }
-            else if(ch3==6){
-                System.out.println("Enter the string you want to perform operations on");
-                String s=sc.nextLine();
-               boolean isit= mn.isPalindrome(s);
-
-               if(isit){
-                   System.out.println("string "+ s +" "+"is a palindrome");
-               }
-               else{
-                   System.out.println("string "+ s +" "+"is not a palindrome");
-               }
-            }
-
-        }
-        else if(ch==4){
-            System.out.println("This is array operations utility");
-            System.out.println("1 print all odd numbers in array\n" +
-                    "2 Print all even numbers \n" +
-                    "3 sum of array \n" +
-                    "4 Find mean \n" +
-                    "5 Find median");
-            int ch4= sc.nextInt();
-            System.out.println("Enter the Size of the array");
-            int n=sc.nextInt();
-            ArrayList <Integer> array=new ArrayList<Integer>(n);
-            for(int i=0; i<n; i++)
-            {
-                int ele=sc.nextInt();
-                array.set(i,ele);
-            }
-            if(ch4==1){
-                mn.printOdd(array);
-            }
-            else if(ch4==2){
-                mn.printEven(array);
-            }
-            else if(ch4==3){
-                mn.sumArray(array);
-            }
-            else if(ch4==4){
-                mn.findMean(array);
-            }
-            else if(ch4==5){
-                mn.findMedian(array);
-            }
-        }
-        else if(ch==5){
-            System.out.println("This bit manipulation menu");
-            System.out.println("1 Next power of 2\n" +
-                    "2 Left rotate\n" +
-                    "3 Right rotate\n" +
-                    "4 Count set bits\n" +
-                    "5 Check if it is power of 4\n");
-            int ch5= sc.nextInt();
-            System.out.println("Enter the number");
-            int n=sc.nextInt();
-
-            if(ch5==1){
-                System.out.println("Next power of n is" + nextPowerOf2(n));
-            }
-            else if(ch5==2){
-                System.out.println("by how much bits you want to rotate n");
-                int x=sc.nextInt();
-                System.out.println("Left rotate n by x"+ leftRotate(n,x));
-            }
-            else if(ch5==3){
-                System.out.println("by how much bits you want to rotate n");
-                int x=sc.nextInt();
-                System.out.println("Right rotate n by x"+ rightRotate(n,x));
-            }
-            else if(ch5==4){
-                System.out.println("Set bits in n "+ countSetBits(n));
-            }
-            else if(ch5==5){
-                int ret=isPowerOfFour(n);
-                if(ret==1){
-                    System.out.println("N is power of four");
-                }
-                else{
-                    System.out.println("N is not a power of four");
-                }
+            else if (ch == 7) {
+                System.out.println("Thank you\n Bye! Have a Good day!\n");
+                break;
             }
         }
     }
 }
+
