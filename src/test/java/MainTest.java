@@ -11,14 +11,14 @@ public class MainTest {
     public void selectionSort() {
         ArrayList<Integer> arr = new ArrayList<Integer>(
                 Arrays.asList(87));
-        // For 1-9 du path
+        // For 1-9 du path, variable n
         assertArrayEquals(arr.toArray(),obj.SelectionSort(arr).toArray());
 
         ArrayList<Integer> exp1 = new ArrayList<Integer>(
                 Arrays.asList(1,2));
         ArrayList<Integer> act1 = new ArrayList<Integer>(
                 Arrays.asList(2,1));
-        // For 1-2-3-4-5-6-74-8-2-9 du path, variable minidx
+        // For 1-2-3-4-5-6-74-8-2-9 du path, variable min_idx
         assertArrayEquals(exp1.toArray(),obj.SelectionSort(act1).toArray());
     }
 
