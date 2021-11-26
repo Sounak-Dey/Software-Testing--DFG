@@ -1,4 +1,3 @@
-package com.company;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -334,9 +333,9 @@ public class Main {
             arr.set(i,temp);
         }
 
-         for (int i=0; i<n; ++i)
-             System.out.print(arr.get(i)+" ");
-         System.out.println();
+        for (int i=0; i<n; ++i)
+            System.out.print(arr.get(i)+" ");
+        System.out.println();
 
     }
 
@@ -356,9 +355,9 @@ public class Main {
                 }
 
 
-         for (int i=0; i<n; ++i)
-             System.out.print(arr.get(i)+" ");
-         System.out.println();
+        for (int i=0; i<n; ++i)
+            System.out.print(arr.get(i)+" ");
+        System.out.println();
     }
 
 
@@ -382,9 +381,9 @@ public class Main {
         }
 
 
-         for (int i=0; i<n; ++i)
-             System.out.print(arr.get(i)+" ");
-         System.out.println();
+        for (int i=0; i<n; ++i)
+            System.out.print(arr.get(i)+" ");
+        System.out.println();
     }
 
 
@@ -396,109 +395,109 @@ public class Main {
         }
         return -1;
     }
-        public int binarySearch(ArrayList<Integer> arr, int x)
-        {
-            int l = 0, r = arr.size() - 1;
-            while (l <= r) {
-                int m = l + (r - l) / 2;
+    public int binarySearch(ArrayList<Integer> arr, int x)
+    {
+        int l = 0, r = arr.size() - 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
 
-                // Check if x is present at mid
-                if (arr.get(m) == x)
-                    return m;
+            // Check if x is present at mid
+            if (arr.get(m) == x)
+                return m;
 
-                // If x greater, ignore left half
-                if (arr.get(m) < x)
-                    l = m + 1;
+            // If x greater, ignore left half
+            if (arr.get(m) < x)
+                l = m + 1;
 
-                    // If x is smaller, ignore right half
-                else
-                    r = m - 1;
+                // If x is smaller, ignore right half
+            else
+                r = m - 1;
+        }
+
+        // if we reach here, then element was not present
+        return -1;
+    }
+
+    public boolean isPalindrome(String str)
+    {
+        int i = 0, j = str.length() - 1;
+        while (i < j) {
+            if (str.charAt(i) != str.charAt(j))
+                return false;
+            i++;
+            j--;
+        }
+
+        // Given string is a palindrome
+        return true;
+    }
+    public int max(ArrayList<Integer> array) {
+        int max = 0;
+
+        for(int i=0; i<array.size(); i++ ) {
+            if(array.get(i)>max) {
+                max = array.get(i);
+            }
+        }
+        return max;
+    }
+    public int min(ArrayList<Integer> array) {
+        int min = array.get(0);
+
+        for(int i=0; i<array.size(); i++ ) {
+            if(array.get(i)<min) {
+                min = array.get(i);
+            }
+        }
+        return min;
+    }
+
+    public int lower_bound(ArrayList<Integer> array, int key)
+    {
+        int low = 0, high = array.size();
+        int mid;
+
+        while (low < high) {
+            mid = low + (high - low) / 2;
+            if (key <= array.get(mid)) {
+                high = mid;
             }
 
-            // if we reach here, then element was not present
+            else {
+
+                low = mid + 1;
+            }
+        }
+        if (low < array.size() && array.get(low) < key) {
+            low++;
+        }
+
+        // Returning the lower_bound index
+        return low;
+    }
+
+    public int upper_bound(ArrayList<Integer> arr, int key)
+    {
+        int mid, N = arr.size();
+        int low = 0;
+        int high = N;
+        while (low < high && low != N) {
+            mid = low + (high - low) / 2;
+
+            if (key >= arr.get(mid)) {
+                low = mid + 1;
+            }
+            else {
+                high = mid;
+            }
+        }
+
+        if (low == N ) {
             return -1;
         }
 
-        public boolean isPalindrome(String str)
-        {
-            int i = 0, j = str.length() - 1;
-            while (i < j) {
-                if (str.charAt(i) != str.charAt(j))
-                    return false;
-                i++;
-                j--;
-            }
-
-            // Given string is a palindrome
-            return true;
-        }
-        public int max(ArrayList<Integer> array) {
-            int max = 0;
-
-            for(int i=0; i<array.size(); i++ ) {
-                if(array.get(i)>max) {
-                    max = array.get(i);
-                }
-            }
-            return max;
-        }
-        public int min(ArrayList<Integer> array) {
-            int min = array.get(0);
-
-            for(int i=0; i<array.size(); i++ ) {
-                if(array.get(i)<min) {
-                    min = array.get(i);
-                }
-            }
-            return min;
-        }
-
-        public int lower_bound(ArrayList<Integer> array, int key)
-        {
-            int low = 0, high = array.size();
-            int mid;
-
-            while (low < high) {
-                mid = low + (high - low) / 2;
-                if (key <= array.get(mid)) {
-                    high = mid;
-                }
-
-                else {
-
-                    low = mid + 1;
-                }
-            }
-            if (low < array.size() && array.get(low) < key) {
-                low++;
-            }
-
-            // Returning the lower_bound index
-            return low;
-        }
-
-        public int upper_bound(ArrayList<Integer> arr, int key)
-        {
-            int mid, N = arr.size();
-            int low = 0;
-            int high = N;
-            while (low < high && low != N) {
-                mid = low + (high - low) / 2;
-
-                if (key >= arr.get(mid)) {
-                    low = mid + 1;
-                }
-                else {
-                    high = mid;
-                }
-            }
-
-            if (low == N ) {
-                return -1;
-            }
-
-            return low;
-        }
+        return low;
+    }
 
     public void findCommon(int ar1[], int ar2[], int ar3[])
     {
@@ -661,7 +660,7 @@ public class Main {
         int inv_count = 0;
         for (int i = 0; i < n - 1; i++)
             for (int j = i + 1; j < n; j++)
-                if (arr.get(i) > arr.get(i))
+                if (arr.get(i) > arr.get(j))
                     inv_count++;
 
         return inv_count;
@@ -766,7 +765,7 @@ public class Main {
             System.out.print(arr[i] + " ");
     }
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         System.out.println("Welcome to DSA Util CLI");
         while(true) {
             System.out.println("Enter the choice");
@@ -1045,4 +1044,3 @@ public class Main {
         }
     }
 }
-
