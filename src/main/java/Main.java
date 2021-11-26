@@ -660,7 +660,7 @@ public class Main {
         int inv_count = 0;
         for (int i = 0; i < n - 1; i++)
             for (int j = i + 1; j < n; j++)
-                if (arr.get(j) > arr.get(i))
+                if (arr.get(i) > arr.get(j))
                     inv_count++;
 
         return inv_count;
