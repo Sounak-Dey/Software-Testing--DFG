@@ -313,7 +313,7 @@ public class Main {
 
         return result;
     }
-    void SelectionSort(ArrayList<Integer> arr)
+    ArrayList<Integer> SelectionSort(ArrayList<Integer> arr)
     {
         int n = arr.size();
 
@@ -336,12 +336,12 @@ public class Main {
         for (int i=0; i<n; ++i)
             System.out.print(arr.get(i)+" ");
         System.out.println();
-
+        return arr;
     }
 
 
 
-    void BubbleSort(ArrayList <Integer> arr)
+    ArrayList<Integer> BubbleSort(ArrayList <Integer> arr)
     {
         int n = arr.size();
         for (int i = 0; i < n-1; i++)
@@ -353,15 +353,14 @@ public class Main {
                     arr.set(j,arr.get(j+1));
                     arr.set(j+1,temp);
                 }
-
-
         for (int i=0; i<n; ++i)
             System.out.print(arr.get(i)+" ");
         System.out.println();
+        return arr;
     }
 
 
-    void Insertionsort(ArrayList<Integer> arr)
+    ArrayList<Integer> Insertionsort(ArrayList<Integer> arr)
     {
         int n = arr.size();
         for (int i = 1; i < n; ++i)
@@ -384,6 +383,7 @@ public class Main {
         for (int i=0; i<n; ++i)
             System.out.print(arr.get(i)+" ");
         System.out.println();
+        return arr;
     }
 
 
